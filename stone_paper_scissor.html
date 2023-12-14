@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stone, Paper, Scissors Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #heading {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    #colorPicker {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 16px;
+    }
+
+    #game-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    button {
+      font-size: 16px;
+      margin: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    #result {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    #score {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    #tryAgainBtn,
+    #restartBtn {
+      display: none;
+      background-color: black;
+      color: white;
+      margin-top: 10px;
+    }
+
+    #instructions {
+      font-size: 18px;
+      text-align: left;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="colorPicker">
+    <label for="backgroundColor">Choose Background Color:</label>
+    <select id="backgroundColor" onchange="changeBackgroundColor()">
+      <option value="#ffffff">White</option>
+      <option value="#add8e6">Light Blue</option>
+      <option value="#90ee90">Light Green</option>
+      <option value="#f08080">Light Coral</option>
+      <option value="#fafad2">Light Goldenrod Yellow</option>
+    </select>
+  </div>
+
+  <h1 id="heading">Stone, Paper, Scissors</h1>
+
+  <div id="game-container">
+
+    <button onclick="playGame('🪨')">🪨</button>
+    <button onclick="playGame('📄')">📄</button>
+    <button onclick="playGame('✂️')">✂️</button>
+    <button id="tryAgainBtn" onclick="tryAgain()">Try Again</button>
+    <button id="restartBtn" onclick="restartGame()">Restart Game</button>
+
+    <div id="result"></div>
+    <div id="score">Score: 0</div>
+
+    <div id="instructions">
+      <h3>
+        
+        
+        Instructions...</h3>
+      <p>Click on one of the emojis to make your move:</p>
+      <ul>
+        <li>🪨 beats ✂️</li>
+        <li>📄 beats 🪨</li>
+        <li>✂️ beats 📄</li>
+      </ul>
+      <p>The computer will randomly choose its move. Try to beat the computer and keep track of your score!</p>
+      <p>Scoring:</p>
+      <ul>
+        <li>1 point for winning a round</li>
+        <li>0 points for a tie</li>
+        <li>-1 point for losing a round</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <script>
+    let score = 0;
+    let gameInProgress = false;
+
+    function playGame(playerChoice) {
+      if (gameInProgress) {
+        alert("Please click 'Try Again' or 'Restart Game' to make a new move.");
+        return;
+      }
+
+      const choices = ['🪨', '📄', '✂️'];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+      const result = determineWinner(playerChoice, computerChoice);
+
+      document.getElementById('result').innerText = `You chose ${playerChoice}. Computer chose ${computerChoice}. ${result}`;
+
+      if (result === 'You win!') {
+        score++;
+      } else if (result === 'Computer wins!') {
+        score--;
+      }
+
+      document.getElementById('score').innerText = `Score: ${score}`;
+      showTryAgainAndRestartButtons();
+    }
+
+    function determineWinner(playerChoice, computerChoice) {
+      if (playerChoice === computerChoice) {
+        return 'It\'s a tie!';
+      } else if (
+        (playerChoice === '🪨' && computerChoice === '✂️') ||
+        (playerChoice === '📄' && computerChoice === '🪨') ||
+        (playerChoice === '✂️' && computerChoice === '📄')
+      ) {
+        return 'You win!';
+      } else {
+        return 'Computer wins!';
+      }
+    }
+
+    function showTryAgainAndRestartButtons() {
+      gameInProgress = true;
+      document.getElementById('tryAgainBtn').style.display = 'inline';
+      document.getElementById('restartBtn').style.display = 'inline';
+    }
+
+    function tryAgain() {
+      gameInProgress = false;
+      document.getElementById('result').innerText = '';
+      document.getElementById('tryAgainBtn').style.display = 'none';
+      document.getElementById('restartBtn').style.display = 'none';
+    }
+
+    function restartGame() {
+      score = 0;
+      document.getElementById('score').innerText = `Score: ${score}`;
+      tryAgain();
+    }
+
+    function changeBackgroundColor() {
+      const selectedColor = document.getElementById('backgroundColor').value;
+      document.body.style.backgroundColor = selectedColor;
+    }
+  </script>
+
+</body>
+</html>
