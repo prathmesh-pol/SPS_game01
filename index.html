@@ -13,15 +13,11 @@
       flex-direction: column;
       align-items: center;
       height: 100vh;
+      background-color: #fafad2; /* Initial background color: Light Goldenrod Yellow */
     }
 
     #heading {
       font-size: 24px;
-      margin-top: 20px;
-    }
-
-    #colorPicker {
-      font-size: 16px;
       margin-top: 20px;
     }
 
@@ -104,17 +100,6 @@
 
   </div>
 
-  <div id="colorPicker">
-    <label for="backgroundColor">Choose Background Color:</label>
-    <select id="backgroundColor" onchange="changeBackgroundColor()">
-      <option value="#ffffff">White</option>
-      <option value="#add8e6">Light Blue</option>
-      <option value="#90ee90">Light Green</option>
-      <option value="#f08080">Light Coral</option>
-      <option value="#fafad2">Light Goldenrod Yellow</option>
-    </select>
-  </div>
-
   <script>
     let score = 0;
     let gameInProgress = false;
@@ -173,11 +158,6 @@
       score = 0;
       document.getElementById('score').innerText = `Score: ${score}`;
       tryAgain();
-    }
-
-    function changeBackgroundColor() {
-      const selectedColor = document.getElementById('backgroundColor').value;
-      document.body.style.backgroundColor = selectedColor;
     }
   </script>
 
