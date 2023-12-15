@@ -21,10 +21,8 @@
     }
 
     #colorPicker {
-      position: absolute;
-      top: 10px;
-      right: 10px;
       font-size: 16px;
+      margin-top: 20px;
     }
 
     #game-container {
@@ -62,20 +60,17 @@
       text-align: left;
       margin-top: 20px;
     }
+
+    @media only screen and (max-width: 600px) {
+      #colorPicker {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+      }
+    }
   </style>
 </head>
 <body>
-
-  <div id="colorPicker">
-    <label for="backgroundColor">Choose Background Color:</label>
-    <select id="backgroundColor" onchange="changeBackgroundColor()">
-      <option value="#ffffff">White</option>
-      <option value="#add8e6">Light Blue</option>
-      <option value="#90ee90">Light Green</option>
-      <option value="#f08080">Light Coral</option>
-      <option value="#fafad2">Light Goldenrod Yellow</option>
-    </select>
-  </div>
 
   <h1 id="heading">Stone, Paper, Scissors</h1>
 
@@ -91,10 +86,7 @@
     <div id="score">Score: 0</div>
 
     <div id="instructions">
-      <h3>
-        
-        
-        Instructions...</h3>
+      <h2>Instructions</h2>
       <p>Click on one of the emojis to make your move:</p>
       <ul>
         <li>🪨 beats ✂️</li>
@@ -110,6 +102,17 @@
       </ul>
     </div>
 
+  </div>
+
+  <div id="colorPicker">
+    <label for="backgroundColor">Choose Background Color:</label>
+    <select id="backgroundColor" onchange="changeBackgroundColor()">
+      <option value="#ffffff">White</option>
+      <option value="#add8e6">Light Blue</option>
+      <option value="#90ee90">Light Green</option>
+      <option value="#f08080">Light Coral</option>
+      <option value="#fafad2">Light Goldenrod Yellow</option>
+    </select>
   </div>
 
   <script>
@@ -139,44 +142,4 @@
       showTryAgainAndRestartButtons();
     }
 
-    function determineWinner(playerChoice, computerChoice) {
-      if (playerChoice === computerChoice) {
-        return 'It\'s a tie!';
-      } else if (
-        (playerChoice === '🪨' && computerChoice === '✂️') ||
-        (playerChoice === '📄' && computerChoice === '🪨') ||
-        (playerChoice === '✂️' && computerChoice === '📄')
-      ) {
-        return 'You win!';
-      } else {
-        return 'Computer wins!';
-      }
-    }
-
-    function showTryAgainAndRestartButtons() {
-      gameInProgress = true;
-      document.getElementById('tryAgainBtn').style.display = 'inline';
-      document.getElementById('restartBtn').style.display = 'inline';
-    }
-
-    function tryAgain() {
-      gameInProgress = false;
-      document.getElementById('result').innerText = '';
-      document.getElementById('tryAgainBtn').style.display = 'none';
-      document.getElementById('restartBtn').style.display = 'none';
-    }
-
-    function restartGame() {
-      score = 0;
-      document.getElementById('score').innerText = `Score: ${score}`;
-      tryAgain();
-    }
-
-    function changeBackgroundColor() {
-      const selectedColor = document.getElementById('backgroundColor').value;
-      document.body.style.backgroundColor = selectedColor;
-    }
-  </script>
-
-</body>
-</html>
+    function determineWinner(playerChoice, computerChoice)
