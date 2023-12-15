@@ -1,4 +1,4 @@
-# Stone, Paper, Scissors Game
+# Stone🪨, Paper📄, Scissors✂️ Game
 
 A simple Stone, Paper, Scissors game implemented in HTML, CSS, and JavaScript.
 
