@@ -142,4 +142,44 @@
       showTryAgainAndRestartButtons();
     }
 
-    function determineWinner(playerChoice, computerChoice)
+    function determineWinner(playerChoice, computerChoice) {
+      if (playerChoice === computerChoice) {
+        return 'It\'s a tie!';
+      } else if (
+        (playerChoice === '🪨' && computerChoice === '✂️') ||
+        (playerChoice === '📄' && computerChoice === '🪨') ||
+        (playerChoice === '✂️' && computerChoice === '📄')
+      ) {
+        return 'You win!';
+      } else {
+        return 'Computer wins!';
+      }
+    }
+
+    function showTryAgainAndRestartButtons() {
+      gameInProgress = true;
+      document.getElementById('tryAgainBtn').style.display = 'inline';
+      document.getElementById('restartBtn').style.display = 'inline';
+    }
+
+    function tryAgain() {
+      gameInProgress = false;
+      document.getElementById('result').innerText = '';
+      document.getElementById('tryAgainBtn').style.display = 'none';
+      document.getElementById('restartBtn').style.display = 'none';
+    }
+
+    function restartGame() {
+      score = 0;
+      document.getElementById('score').innerText = `Score: ${score}`;
+      tryAgain();
+    }
+
+    function changeBackgroundColor() {
+      const selectedColor = document.getElementById('backgroundColor').value;
+      document.body.style.backgroundColor = selectedColor;
+    }
+  </script>
+
+</body>
+</html>
